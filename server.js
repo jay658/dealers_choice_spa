@@ -14,6 +14,8 @@ const Food = db.define('food',{
     }
 })
 
+app.use(express.json())
+
 app.use('/src', express.static(path.join(__dirname, 'src')))
 
 app.get('/', (req, res)=>res.sendFile(path.join(__dirname, 'index.html')))
@@ -30,9 +32,8 @@ app.delete('/api/foods/:id', async(req, res, next)=>{
 
 app.post('/api/foods', async(req, res, next)=>{
     try{
-        console.log(`teehee ${req.body}`)
-        res.send(req.body)
-        // await Food.create({name: req.body})
+        const food = await Food.create(req.body)
+        res.send(food)
     }catch(ex){
         next(ex)
     }

@@ -13,11 +13,7 @@ const form = document.querySelector('form')
 form.addEventListener('submit', async(ev)=>{
     ev.preventDefault()
     const newFood = document.getElementById('input_item').value
-    console.log(newFood)
-    await axios
-        .post('/api/foods', {"name":newFood})
-        .then(res=> console.log(res))
-        .catch(err=>console.log(err))
+    await axios.post('/api/foods', {name:newFood})
     init()
 })
 
